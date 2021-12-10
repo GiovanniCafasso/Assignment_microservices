@@ -1,0 +1,42 @@
+docker container rm {NAME}  # remove container
+python3 manage.py runserver 0.0.0.0:8000
+
+python3 manage.py makemigrations books
+python3 manage.py migrate
+
+# delete all container stopped
+docker system prune --all --force
+
+# get a bash shell in the container
+docker exec -it <container name> /bin/bash
+
+# esempio json to load
+{
+    "title": "prova_title",
+    "author": "prova_author"
+}
+
+python3 api/manage.py runserver 0.0.0.0:8000
+
+
+## TESTING
+docker exec -it book /bin/bash
+docker exec -it customer /bin/bash
+docker exec -it borrowing /bin/bash
+
+python api/manage.py makemigrations books
+python api/manage.py migrate
+
+python microservices_customer/manage.py makemigrations customers
+python microservices_customer/manage.py migrate
+
+python microservices_borrowing/manage.py makemigrations borrowing
+python microservices_borrowing/manage.py migrate
+
+
+book --> python api/manage.py test books
+customer -->  python microservices_customers/manage.py test customers 
+
+## coverage run --source='.' microservices_customers/manage.py test
+coverage report
+

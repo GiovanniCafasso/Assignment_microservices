@@ -1,0 +1,71 @@
+version: "3.8"
+   
+services:
+  book:
+    build:
+      context: ./api
+    container_name: book
+    command: python api/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - pgdb_book
+
+  pgdb_book:
+    image: postgres:latest
+    container_name: pgdb_book
+    ports:
+      - "5432:5432"
+    command: docker-entrypoint.sh -c 'shared_buffers=256MB' -c 'max_connections=200'
+    volumes:
+      - postgres_data_book:/var/lib/postgresql/data
+      - ./api/dbinit.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+            
+  customer:
+    build:
+      context: ./microservices_customer
+    container_name: customer
+    command: python microservices_customer/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8001:8000"
+
+  borrowing:
+    build:
+      context: ./microservices_borrowing
+    container_name: borrowing
+    command: python microservices_borrowing/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8002:8000"
+    depends_on:
+      - pgdb_borrowing
+
+  pgdb_borrowing:
+    image: postgres:latest
+    container_name: pgdb_borrowing
+    ports:
+      - "5433:5432"
+    command: docker-entrypoint.sh -c 'shared_buffers=256MB' -c 'max_connections=200'
+    volumes:
+      - postgres_data_borrowing:/var/lib/postgresql/data
+      - ./microservices_borrowing/dbinit.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+
+
+volumes:
+  postgres_data_book: {}
+  postgres_data_borrowing: {}

@@ -1,0 +1,6 @@
+Django>=3.0,<4.0
+djangorestframework>=3.12
+pymongo[srv]>=3.12
+dnspython>=2.1
+djongo>=1.3
+
