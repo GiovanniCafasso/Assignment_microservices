@@ -3,10 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from borrowing.models import Borrowing
 from borrowing.serializers import BorrowingSerializer
-import requests
-
-DB_BOOK = requests.get("http://localhost:8000/books")
-DB_CUSTOMER = requests("http://localhost:8000/customers")
+from borrowing.requests_book_customer import DB_CUSTOMER, DB_BOOK
 
 @api_view(['GET', 'POST'])
 def borrowing_list(request):
@@ -20,9 +17,12 @@ def borrowing_list(request):
 
     elif request.method == 'POST':
         serializer = BorrowingSerializer(data=request.data)
-        if serializer.is_valid() & DB_BOOK :
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        if serializer.is_valid():
+            print(serializer.data)
+            # for book in DB_BOOK.json():
+                #if serializer.data['id_book'] == book['id']:
+                    #serializer.save()
+                    #return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

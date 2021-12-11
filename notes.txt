@@ -37,6 +37,20 @@ python microservices_borrowing/manage.py migrate
 book --> python api/manage.py test books
 customer -->  python microservices_customers/manage.py test customers 
 
-## coverage run --source='.' microservices_customers/manage.py test
-coverage report
+## rimuovere immagine
+docker rmi --force <id_images> 
 
+    from requests.adapters import HTTPAdapter
+    from requests.packages.urllib3.util.retry import Retry
+    
+    
+    sessionBook = requests.Session()
+    retryBook = Retry(connect=3, backoff_factor=0.5)
+    adapterBook = HTTPAdapter(max_retries=retryBook)
+    sessionBook.mount('http://localhost:8000/books', adapterBook)
+    
+    print('My lista: ')
+    print(sessionBook)
+    print(retryBook)
+    print(adapterBook)
+    print(sessionBook.params)
