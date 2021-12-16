@@ -1,9 +1,6 @@
 docker container rm {NAME}  # remove container
 python3 manage.py runserver 0.0.0.0:8000
 
-python3 manage.py makemigrations books
-python3 manage.py migrate
-
 # delete all container stopped
 docker system prune --all --force
 
@@ -19,7 +16,6 @@ docker exec -it <container name> /bin/bash
 python3 api/manage.py runserver 0.0.0.0:8000
 
 
-## TESTING
 docker exec -it book /bin/bash
 docker exec -it customer /bin/bash
 docker exec -it borrowing /bin/bash
@@ -39,3 +35,15 @@ customer -->  python microservices_customers/manage.py test customers
 
 ## rimuovere immagine
 docker rmi --force <id_images> 
+
+##########
+RIMOSSO DA book-secrets.yaml
+###########
+STATIC_ACCESS_KEY_ID=
+STATIC_SECRET_KEY=
+
+##############
+RIMOSSO DA book-configMap.yaml - data
+##############
+STATIC_ENDPOINT_URL: ""
+STATIC_BUCKET_NAME: ""

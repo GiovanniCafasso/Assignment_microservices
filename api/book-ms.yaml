@@ -1,0 +1,62 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: book-deployment
+  labels:
+    app: book
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: book
+  template:
+    metadata:
+      labels:
+        app: book
+    spec:
+      containers:
+        - name: book-ms
+          image: giovannicafasso/book:1.0-SNAPSHOT
+          envFrom:
+          - secretRef:
+              name: book-secret
+          ports:
+          - containerPort: 8000
+          volumeMounts:
+          - mountPath: /app/config
+            readOnly: true
+            name: book-conf
+      volumes:
+      - name: book-conf
+        configMap:
+          name: book-conf
+          items:
+            - key: application.properties
+              path: application.properties
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: book-service
+  labels:
+    app: book
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      nodePort: 32102
+      port: 8000
+      targetPort: 8000
+  selector:
+    app: book
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: book-config
+data:
+  DJANGO_ALLOWED_HOSTS: "*"
+  DJANGO_LOGLEVEL: "info"
+  DEBUG: "True"
+  DATABASE_ENGINE: "postgresql_psycopg2

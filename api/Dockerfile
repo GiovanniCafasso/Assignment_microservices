@@ -8,3 +8,5 @@ WORKDIR /usr/src/app
 COPY ./requirements.txt ./
 COPY ./ ./
 RUN pip install -r requirements.txt
+ENV VIRTUAL_ENV /env
+ENV PATH /env/bin:$PATH
