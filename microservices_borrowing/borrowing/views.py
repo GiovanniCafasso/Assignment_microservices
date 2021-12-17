@@ -11,14 +11,13 @@ def borrowing_list(request):
     """
     List all borrowing, or create a new borrowing.
     """
-    
+
     # verify exist book id
     # use .env
     DB_BOOK = requests.get("http://book:8000/books/" )
     print(DB_BOOK.json())
-    DB_CUSTOMER = requests.get("http://customer:8000/customers/" )      # change
-    print(DB_CUSTOMER.json())
-    # print(DB_BOOK.json()[0][0])  
+    # DB_CUSTOMER = requests.get("http://customer:8000/customers/" )      # change
+    # print(DB_CUSTOMER.json())  
 
 
     if request.method == 'GET':
