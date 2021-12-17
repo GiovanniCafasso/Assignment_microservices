@@ -3,19 +3,31 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from borrowing.models import Borrowing
 from borrowing.serializers import BorrowingSerializer
-from borrowing.requests_book_customer import DB_CUSTOMER, DB_BOOK
+import requests
+
 
 @api_view(['GET', 'POST'])
 def borrowing_list(request):
     """
     List all borrowing, or create a new borrowing.
     """
+
+    # verify exist book id
+
+    DB_BOOK = requests.get("http://book:8000/books/" )
+    print(DB_BOOK.json())  
+    # print(DB_BOOK.json()[0][0])  
+
+
     if request.method == 'GET':
         borrowings = Borrowing.objects.all()
         serializer = BorrowingSerializer(borrowings, many=True)
         return Response(serializer.data)
-
     elif request.method == 'POST':
+
+
+
+        
         serializer = BorrowingSerializer(data=request.data)
         if serializer.is_valid():
             print(serializer.data)

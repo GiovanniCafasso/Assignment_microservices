@@ -17,23 +17,13 @@ spec:
     spec:
       containers:
         - name: book-ms
-          image: giovannicafasso/book:1.0-SNAPSHOT
+          image: giovannicafasso/book:1.2-SNAPSHOT
           envFrom:
-          - secretRef:
-              name: book-secret
+          - configMapRef:
+              name: book-config
           ports:
           - containerPort: 8000
-          volumeMounts:
-          - mountPath: /app/config
-            readOnly: true
-            name: book-conf
-      volumes:
-      - name: book-conf
-        configMap:
-          name: book-conf
-          items:
-            - key: application.properties
-              path: application.properties
+          imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service
@@ -59,4 +49,10 @@ data:
   DJANGO_ALLOWED_HOSTS: "*"
   DJANGO_LOGLEVEL: "info"
   DEBUG: "True"
-  DATABASE_ENGINE: "postgresql_psycopg2
+  DATABASE_ENGINE: "postgresql_psycopg2"
+  DJANGO_SECRET_KEY: "django-insecure-f_b9+t*hxq2%qwf8^o%inh!#!u78*jb$4ss%6j73j$yjk7tuw8"
+  DATABASE_NAME: "postgres"
+  DATABASE_USERNAME: "postgres"
+  DATABASE_PASSWORD: "postgres"
+  DATABASE_HOST: "pgdb_book"
+  DATABASE_PORT: "5432"
