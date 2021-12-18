@@ -7,7 +7,7 @@ CREATE TABLE "borrowing"
 (
     id integer,
     id_book integer,
-    id_cutomer character
+    id_cutomer integer
 ) TABLESPACE pg_default;
 
 ALTER TABLE "borrowing"

@@ -13,6 +13,12 @@ docker exec -it <container name> /bin/bash
     "author": "prova_author"
 }
 
+{
+    "id_book": 1,
+    "id_customer": 2
+}
+
+
 python3 api/manage.py runserver 0.0.0.0:8000
 
 

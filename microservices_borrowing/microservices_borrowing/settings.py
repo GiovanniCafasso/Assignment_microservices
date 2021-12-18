@@ -1,4 +1,10 @@
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+# to manage environment variables
+dotenv_path = Path('microservices_borrowing/borrowing-secrets.env')
+load_dotenv(dotenv_path=dotenv_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -8,12 +14,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*rb0)os_c$5ec-3+$6nnnw3whswq(mkjeptbsrwhg8%w(1i#ml'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DJANGO_DEBUG', True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -66,11 +72,11 @@ WSGI_APPLICATION = 'microservices_borrowing.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'pgdb_borrowing',
-        'PORT': 5432,
+        'NAME': os.getenv('DATABASE_NAME', 'postgres'),
+        'USER': os.getenv('DATABASE_USERNAME', 'postgres'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'postgres'),
+        'HOST': os.getenv('DATABASE_HOST', 'pgdb_borrowing'),
+        'PORT': os.getenv('DATABASE_PORT', 5432),
     }
 }
 
