@@ -57,7 +57,7 @@ data:
   DATABASE_HOST: "pgdb_borrowing"
   DATABASE_PORT: "5432"
   # inserire cluster ip dato da 'minikube service --url book-service' e 'minikube service --url customer-service'
-  HOST_BOOK: "book" 
-  HOST_CUSTOMER: "customer"
+  HOST_BOOK: "192.168.49.2" 
+  HOST_CUSTOMER: "192.168.49.2"
   PORT_BOOK: "32102"        
   PORT_CUSTOMER: "32103"
