@@ -1,0 +1,63 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: borrowing-deployment
+  labels:
+    app: borrowing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: borrowing
+  template:
+    metadata:
+      labels:
+        app: borrowing
+    spec:
+      containers:
+        - name: borrowing-ms
+          image: giovannicafasso/borrowing:1.0-SNAPSHOT
+          envFrom:
+          - configMapRef:
+              name: borrowing-config
+          ports:
+          - containerPort: 8000
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: borrowing-service
+  labels:
+    app: borrowing
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      nodePort: 32104
+      port: 8000
+      targetPort: 8000
+  selector:
+    app: borrowing
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: borrowing-config
+data:
+  DJANGO_ALLOWED_HOSTS: "*"
+  DJANGO_LOGLEVEL: "info"
+  DEBUG: "True"
+  DATABASE_ENGINE: "postgresql_psycopg2"
+  DJANGO_SECRET_KEY: "django-insecure-*rb0)os_c$5ec-3+$6nnnw3whswq(mkjeptbsrwhg8%w(1i#ml"
+  DATABASE_NAME: "postgres"
+  DATABASE_USERNAME: "postgres"
+  DATABASE_PASSWORD: "postgres"
+  DATABASE_HOST: "pgdb_borrowing"
+  DATABASE_PORT: "5432"
+  # inserire cluster ip dato da 'minikube service --url book-service' e 'minikube service --url customer-service'
+  HOST_BOOK: "book" 
+  HOST_CUSTOMER: "customer"
+  PORT_BOOK: "32102"        
+  PORT_CUSTOMER: "32103"
