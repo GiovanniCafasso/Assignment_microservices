@@ -22,3 +22,5 @@ initdbScripts:
 
     ALTER TABLE "books"
         OWNER to postgres;
+
+  
