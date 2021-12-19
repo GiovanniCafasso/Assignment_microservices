@@ -56,4 +56,10 @@ STATIC_BUCKET_NAME: ""
 
 
 ip per raggiungere destinazioni:
+10.101.104.194  book
+10.105.157.38   customer
+10.99.247.69    borrowing
 
+
+importare nei ms ConfigMap quando non sei in production 
+verficare collegamento corretto del borrowing ai book e customer ms (service)

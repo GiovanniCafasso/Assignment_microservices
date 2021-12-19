@@ -56,3 +56,4 @@ data:
   DATABASE_PASSWORD: "postgres"
   DATABASE_HOST: "book-postgres"
   DATABASE_PORT: "5432"
+  POSITION: "ConfigMap"

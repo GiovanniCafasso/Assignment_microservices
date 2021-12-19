@@ -10,8 +10,10 @@ import os
 from dotenv import load_dotenv
 
 # to manage environment variables
-dotenv_path = Path('microservices_borrowing/borrowing-config.env')
-load_dotenv(dotenv_path=dotenv_path)
+load_dotenv()
+if os.getenv('POSITION') != "ConfigMap":
+    dotenv_path = Path('microservices_borrowing/borrowing-config.env')
+    load_dotenv(dotenv_path=dotenv_path)
 
 
 @api_view(['GET', 'POST'])

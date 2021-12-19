@@ -55,3 +55,4 @@ data:
   DATABASE_USERNAME: "root"
   DATABASE_PASSWORD: "root"
   DATABASE_PORT: "27017"
+  POSITION: "ConfigMap"
