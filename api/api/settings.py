@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 
 # to manage environment variables
-dotenv_path = Path('api/book-secrets.env')
+dotenv_path = Path('api/book-config.env')
 load_dotenv(dotenv_path=dotenv_path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
