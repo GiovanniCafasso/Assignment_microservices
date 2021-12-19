@@ -53,3 +53,7 @@ RIMOSSO DA book-configMap.yaml - data
 ##############
 STATIC_ENDPOINT_URL: ""
 STATIC_BUCKET_NAME: ""
+
+
+aggiornare yaml values in fondo e tirarli su,
+poi senti Albi 
