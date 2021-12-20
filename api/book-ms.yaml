@@ -17,13 +17,18 @@ spec:
     spec:
       containers:
         - name: book-ms
-          image: giovannicafasso/book:1.3-SNAPSHOT
+          image: giovannicafasso/book:1.5-SNAPSHOT
           envFrom:
           - configMapRef:
               name: book-config
           ports:
           - containerPort: 8000
           imagePullPolicy: Always
+      initContainers:
+      - name: init-myservice
+        image: giovannicafasso/book:1.4-SNAPSHOT
+        command: ['/bin/sh', '-c', 'python', 'manage.py', 'makemigrations', 'app']
+        command: ['/bin/sh', '-c', 'python', 'manage.py', 'migrate']
 ---
 apiVersion: v1
 kind: Service
@@ -57,3 +62,4 @@ data:
   DATABASE_HOST: "book-postgres"
   DATABASE_PORT: "5432"
   POSITION: "ConfigMap"
+

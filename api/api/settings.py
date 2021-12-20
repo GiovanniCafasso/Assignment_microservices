@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 
 # to manage environment variables
 load_dotenv()
+print(os.getenv('POSITION'))
 if os.getenv('POSITION') != "ConfigMap":
     dotenv_path = Path('api/book-config.env')
     load_dotenv(dotenv_path=dotenv_path)
