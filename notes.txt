@@ -60,6 +60,7 @@ ip per raggiungere destinazioni:
 10.105.157.38   customer
 10.99.247.69    borrowing
 
-
-importare nei ms ConfigMap quando non sei in production 
-verficare collegamento corretto del borrowing ai book e customer ms (service)
+-come collegarsi ai ms
+-verficare collegamento corretto del borrowing ai book e customer ms (service)
+-kibana resta in pending
+...

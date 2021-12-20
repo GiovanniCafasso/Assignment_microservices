@@ -7,6 +7,9 @@ load_dotenv()
 if os.getenv('POSITION') != "ConfigMap":
     dotenv_path = Path('api/book-config.env')
     load_dotenv(dotenv_path=dotenv_path)
+    print('Sto usando .env')
+else:
+    print('Sto usando il ConfgiMap')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
