@@ -26,7 +26,7 @@ spec:
           imagePullPolicy: Always
       initContainers:
       - name: init-myservice
-        image: giovannicafasso/book:1.4-SNAPSHOT
+        image: giovannicafasso/book:1.5-SNAPSHOT
         command: ['/bin/sh', '-c', 'python', 'manage.py', 'makemigrations', 'app']
         command: ['/bin/sh', '-c', 'python', 'manage.py', 'migrate']
 ---
