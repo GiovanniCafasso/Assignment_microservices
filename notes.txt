@@ -62,6 +62,4 @@ ip per raggiungere destinazioni:
 
 
 
-aggiungere initContainers agli altri 2 ms 
 non so come raggiugnere i ms --> non vedo log errati
-check log db
