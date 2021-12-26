@@ -27,7 +27,7 @@ spec:
       initContainers:
       - name: init-myservice
         image: giovannicafasso/customer:1.0-SNAPSHOT
-        command: ['/bin/sh', '-c', 'python', 'manage.py', 'makemigrations', 'app']
+        command: ['/bin/sh', '-c', 'python', 'manage.py', 'makemigrations', 'customer']
         command: ['/bin/sh', '-c', 'python', 'manage.py', 'migrate']
 ---
 apiVersion: v1
