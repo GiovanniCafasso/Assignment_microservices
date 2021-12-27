@@ -17,13 +17,13 @@ spec:
     spec:
       containers:
         - name: book-ms
-          image: giovannicafasso/book:1.8-SNAPSHOT
+          image: giovannicafasso/book:2.0-SNAPSHOT
           ports:
           - containerPort: 8000
           imagePullPolicy: Always
       initContainers:
       - name: init-myservice
-        image: giovannicafasso/book:1.8-SNAPSHOT
+        image: giovannicafasso/book:2.0-SNAPSHOT
           envFrom:
           - configMapRef:
               name: book-config
