@@ -1,12 +1,7 @@
 from pathlib import Path
 import os
-from dotenv import load_dotenv
 
-# to manage environment variables
-load_dotenv()
-if os.getenv('POSITION') != "ConfigMap":
-    dotenv_path = Path('microservices_customer/customer-config.env')
-    load_dotenv(dotenv_path=dotenv_path)
+print(os.getenv("POSITION"))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

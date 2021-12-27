@@ -17,16 +17,16 @@ spec:
     spec:
       containers:
         - name: book-ms
-          image: giovannicafasso/book:1.5-SNAPSHOT
-          envFrom:
-          - configMapRef:
-              name: book-config
+          image: giovannicafasso/book:1.8-SNAPSHOT
           ports:
           - containerPort: 8000
           imagePullPolicy: Always
       initContainers:
       - name: init-myservice
-        image: giovannicafasso/book:1.5-SNAPSHOT
+        image: giovannicafasso/book:1.8-SNAPSHOT
+          envFrom:
+          - configMapRef:
+              name: book-config
         command: ['/bin/sh', '-c', 'python', 'manage.py', 'makemigrations', 'book']
         command: ['/bin/sh', '-c', 'python', 'manage.py', 'migrate']
 ---
