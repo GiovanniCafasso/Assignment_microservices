@@ -61,9 +61,9 @@ data:
   DATABASE_PASSWORD: "postgres"
   DATABASE_HOST: "borrowing-postgres"
   DATABASE_PORT: "5432"
-  #'minikube service --url book-service' e 'minikube service --url customer-service'  \\\\  kubectl get services (CLUSTER_IP)
   HOST_BOOK: "192.168.49.2" #10.101.104.194:8000 
   HOST_CUSTOMER: "192.168.49.2" #10.105.157.38:8000
   PORT_BOOK: "32102"        
   PORT_CUSTOMER: "32103"
   POSITION: "ConfigMap"
+  #'minikube service --url book-service' e 'minikube service --url customer-service'  \\\\  kubectl get services (CLUSTER_IP)
