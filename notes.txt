@@ -62,4 +62,4 @@ ip per raggiungere destinazioni:
 
 
 
-non so come raggiugnere i ms --> non vedo log errati
+push delle immagini e prova a collegarti
