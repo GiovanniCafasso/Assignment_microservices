@@ -46,7 +46,7 @@ services:
       - "8001:8000"
 
   borrowing:
-    image: giovannicafasso/borrowing:2.0-SNAPSHOT   # docker build . -t borrowing-py:test
+    image: giovannicafasso/borrowing:2.1-SNAPSHOT   # docker build . -t borrowing-py:test
     container_name: borrowing
     environment:
       DJANGO_SECRET_KEY: django-insecure-*rb0)os_c$$5ec-3+$$6nnnw3whswq(mkjeptbsrwhg8%w(1i#ml

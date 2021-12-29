@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: borrowing-ms
-          image: giovannicafasso/borrowing:2.0-SNAPSHOT
+          image: giovannicafasso/borrowing:2.1-SNAPSHOT
           envFrom:
           - configMapRef:
               name: borrowing-config
@@ -26,7 +26,7 @@ spec:
           imagePullPolicy: Always
       initContainers:
       - name: init-myservice
-        image: giovannicafasso/borrowing:2.0-SNAPSHOT
+        image: giovannicafasso/borrowing:2.1-SNAPSHOT
         command: ['/bin/sh', '-c', 'python', 'manage.py', 'makemigrations', 'borrowing']
         command: ['/bin/sh', '-c', 'python', 'manage.py', 'migrate']
 ---
