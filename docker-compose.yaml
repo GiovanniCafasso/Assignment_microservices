@@ -2,7 +2,7 @@ version: "3.8"
    
 services:
   book:
-    image: book-py:test   # docker build . -t book-py:test
+    image: giovannicafasso/book:2.0-SNAPSHOT   # docker build . -t book-py:test
     container_name: book
     environment:
       DJANGO_SECRET_KEY: django-insecure-f_b9+t*hxq2%qwf8^o%inh!#!u78*jb$$4ss%6j73j$$yjk7tuw8
@@ -33,7 +33,7 @@ services:
       POSTGRES_DB: postgres
             
   customer:
-    image: customer-py:test   # docker build . -t customer-py:test
+    image: giovannicafasso/customer:2.0-SNAPSHOT   # docker build . -t customer-py:test
     container_name: customer
     environment:
       DJANGO_SECRET_KEY: django-insecure-&s3d*_rfyrke=lf)y3psfd(($$4321a*ft%%gdy+@hjcr6hwvh1
@@ -41,12 +41,12 @@ services:
       DATABASE_USERNAME: root
       DATABASE_PASSWORD: root
       DATABASE_PORT: 27017
-    command: python microservices_customer/manage.py runserver 0.0.0.0:8000
+      POSITION: compose
     ports:
       - "8001:8000"
 
   borrowing:
-    image: borrowing-py:test   # docker build . -t borrowing-py:test
+    image: giovannicafasso/borrowing:2.0-SNAPSHOT   # docker build . -t borrowing-py:test
     container_name: borrowing
     environment:
       DJANGO_SECRET_KEY: django-insecure-*rb0)os_c$$5ec-3+$$6nnnw3whswq(mkjeptbsrwhg8%w(1i#ml
@@ -55,11 +55,11 @@ services:
       DATABASE_PASSWORD: postgres
       DATABASE_HOST: pgdb_borrowing
       DATABASE_PORT: 5432
-      HOST_BOOK: book
-      HOST_CUSTOMER: customer
+      HOST_BOOK: localhost
+      HOST_CUSTOMER: localhost
       PORT_BOOK: 8000          
-      PORT_CUSTOMER: 8000
-    command: python microservices_borrowing/manage.py runserver 0.0.0.0:8000
+      PORT_CUSTOMER: 8001
+      POSITION: compose
     ports:
       - "8002:8000"
     depends_on:
