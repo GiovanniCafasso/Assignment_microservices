@@ -61,5 +61,4 @@ http://192.168.49.2:32103/customers  customer
 http://192.168.49.2:32104/borrowing    borrowing
 
 
-
-push delle immagini e prova a collegarti
+Collegamento con borrowing fallisce per presunto 'migrate' che fallisce o non parte
