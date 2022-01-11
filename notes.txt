@@ -42,18 +42,6 @@ customer -->  python microservices_customers/manage.py test customers
 ## rimuovere immagine
 docker rmi --force <id_images> 
 
-##########
-RIMOSSO DA book-secrets.yaml
-###########
-STATIC_ACCESS_KEY_ID=
-STATIC_SECRET_KEY=
-
-##############
-RIMOSSO DA book-configMap.yaml - data
-##############
-STATIC_ENDPOINT_URL: ""
-STATIC_BUCKET_NAME: ""
-
 
 ip per raggiungere destinazioni:
 http://192.168.49.2:32102/books/  book
