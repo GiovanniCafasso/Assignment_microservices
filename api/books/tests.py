@@ -7,7 +7,8 @@ class BookTestCase(TestCase):
     def test_post_plus_get(self):
         Book.objects.create(title="title1", author="author1")
         Book.objects.create(title="title2", author="author2")
+        print("Created book")
         books = Book.objects.all()
         serializer = BookSerializer(books, many=True)
-        print("get_all: " + str(serializer.data))
+        print("Serializer book: " + str(serializer.data))
 
