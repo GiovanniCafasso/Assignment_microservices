@@ -2,7 +2,7 @@ version: "3.8"
    
 services:
   book:
-    image: giovannicafasso/book:2.0-SNAPSHOT   # docker build . -t book-py:test
+    image: giovannicafasso/book:2.1-SNAPSHOT   # docker build . -t book-py:test
     container_name: book
     environment:
       DJANGO_SECRET_KEY: django-insecure-f_b9+t*hxq2%qwf8^o%inh!#!u78*jb$$4ss%6j73j$$yjk7tuw8
