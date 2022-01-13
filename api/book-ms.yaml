@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: book-ms
-          image: giovannicafasso/book:2.1-SNAPSHOT
+          image: giovannicafasso/book:2.2-SNAPSHOT
           ports:
           - containerPort: 8000
           envFrom:
@@ -26,7 +26,7 @@ spec:
           imagePullPolicy: Always
       initContainers:
       - name: init-myservice
-        image: giovannicafasso/book:2.1-SNAPSHOT
+        image: giovannicafasso/book:2.2-SNAPSHOT
         command: ['/bin/sh', '-c', 'python', 'manage.py', 'makemigrations', 'book']
         command: ['/bin/sh', '-c', 'python', 'manage.py', 'migrate']
 ---

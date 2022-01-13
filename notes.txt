@@ -5,7 +5,7 @@ python3 manage.py runserver 0.0.0.0:8000
 docker system prune --all --force
 
 # get a bash shell in the container
-docker exec -it <container name> /bin/bash
+docker exec -it <container name> bash
 
 # esempio json to load
 {
@@ -19,25 +19,25 @@ docker exec -it <container name> /bin/bash
 }
 
 
-python3 api/manage.py runserver 0.0.0.0:8000
+python3 manage.py runserver 0.0.0.0:8000
 
 
-docker exec -it book /bin/bash
-docker exec -it customer /bin/bash
-docker exec -it borrowing /bin/bash
+docker exec -it book bash
+docker exec -it customer bash
+docker exec -it borrowing bash
 
-python api/manage.py makemigrations books
-python api/manage.py migrate
+python manage.py makemigrations books
+python manage.py migrate
 
-python microservices_customer/manage.py makemigrations customers
-python microservices_customer/manage.py migrate
+python manage.py makemigrations customers
+python manage.py migrate
 
-python microservices_borrowing/manage.py makemigrations borrowing
-python microservices_borrowing/manage.py migrate
+python manage.py makemigrations borrowing
+python manage.py migrate
 
 
-book --> python api/manage.py test books
-customer -->  python microservices_customers/manage.py test customers 
+book --> python manage.py test books
+customer -->  python manage.py test customers 
 
 ## rimuovere immagine
 docker rmi --force <id_images> 
