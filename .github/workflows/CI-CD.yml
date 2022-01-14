@@ -1,0 +1,103 @@
+name: CICD
+
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build-book:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.7, 3.8, 3.9]
+    defaults:
+      run:
+        working-directory: api
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r api/requirements.txt
+      - name: Run Tests
+        run: |
+          python api/manage.py test
+      # Download your repo to work with it
+      - uses: actions/checkout@v2
+      - name: Add hosts to /etc/hosts
+        run: |
+          sudo tee -a /etc/hosts
+      - name: Get branch
+        id: get_branch
+        run: echo ::set-output name=BRANCH::$(echo $GITHUB_REF | cut -d / -f 3)
+      - name: Get the commit SHA
+        id: get_commit_sha
+        run: echo ::set-output name=COMMIT_SHA::$(git rev-parse --short "$GITHUB_SHA")
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v1.1.0 
+        with:
+          path: api
+          dockerfile: api/Dockerfile
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: ${{ secrets.DOCKER_USERNAME }}/book
+
+  build-customer:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: microservices_customer
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - name: Add hosts to /etc/hosts
+        run: |
+          sudo tee -a /etc/hosts
+      - name: Get branch
+        id: get_branch
+        run: echo ::set-output name=BRANCH::$(echo $GITHUB_REF | cut -d / -f 3)
+      - name: Get the commit SHA
+        id: get_commit_sha
+        run: echo ::set-output name=COMMIT_SHA::$(git rev-parse --short "$GITHUB_SHA")
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v1.1.0 
+        with:
+          path: microservices_customer
+          dockerfile: microservices_customer/Dockerfile
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: ${{ secrets.DOCKER_USERNAME }}/customer
+
+  build-borrowing:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: microservices_borrowing
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Add hosts to /etc/hosts
+        run: |
+          sudo tee -a /etc/hosts
+      - name: Get branch
+        id: get_branch
+        run: echo ::set-output name=BRANCH::$(echo $GITHUB_REF | cut -d / -f 3)
+      - name: Get the commit SHA
+        id: get_commit_sha
+        run: echo ::set-output name=COMMIT_SHA::$(git rev-parse --short "$GITHUB_SHA")
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v1.1.0 
+        with:
+          path: microservices_borrowing
+          dockerfile: microservices_borrowing/Dockerfile
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: ${{ secrets.DOCKER_USERNAME }}/borrowing
