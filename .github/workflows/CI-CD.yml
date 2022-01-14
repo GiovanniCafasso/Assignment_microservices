@@ -30,17 +30,6 @@ jobs:
       - name: Run Tests
         run: |
           python manage.py test
-      # Download your repo to work with it
-      - uses: actions/checkout@v2
-      - name: Add hosts to /etc/hosts
-        run: |
-          sudo tee -a /etc/hosts
-      - name: Get branch
-        id: get_branch
-        run: echo ::set-output name=BRANCH::$(echo $GITHUB_REF | cut -d / -f 3)
-      - name: Get the commit SHA
-        id: get_commit_sha
-        run: echo ::set-output name=COMMIT_SHA::$(git rev-parse --short "$GITHUB_SHA")
       - name: Build and push Docker image
         uses: docker/build-push-action@v1.1.0 
         with:
@@ -59,17 +48,6 @@ jobs:
       run:
         working-directory: microservices_customer
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - name: Add hosts to /etc/hosts
-        run: |
-          sudo tee -a /etc/hosts
-      - name: Get branch
-        id: get_branch
-        run: echo ::set-output name=BRANCH::$(echo $GITHUB_REF | cut -d / -f 3)
-      - name: Get the commit SHA
-        id: get_commit_sha
-        run: echo ::set-output name=COMMIT_SHA::$(git rev-parse --short "$GITHUB_SHA")
       - name: Build and push Docker image
         uses: docker/build-push-action@v1.1.0 
         with:
@@ -89,16 +67,6 @@ jobs:
         working-directory: microservices_borrowing
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Add hosts to /etc/hosts
-        run: |
-          sudo tee -a /etc/hosts
-      - name: Get branch
-        id: get_branch
-        run: echo ::set-output name=BRANCH::$(echo $GITHUB_REF | cut -d / -f 3)
-      - name: Get the commit SHA
-        id: get_commit_sha
-        run: echo ::set-output name=COMMIT_SHA::$(git rev-parse --short "$GITHUB_SHA")
       - name: Build and push Docker image
         uses: docker/build-push-action@v1.1.0 
         with:
