@@ -19,6 +19,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Add hosts to /etc/hosts
+        run: |
+          sudo echo "127.0.0.1 book-postgres" | sudo tee -a /etc/hosts
+      - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
@@ -54,6 +58,10 @@ jobs:
       run:
         working-directory: microservices_customer
     steps:
+      - uses: actions/checkout@v2
+      - name: Add hosts to /etc/hosts
+        run: |
+          sudo echo "127.0.0.1 customer-mongodb" | sudo tee -a /etc/hosts
       - name: Get branch
         id: get_branch
         run: echo ::set-output name=BRANCH::$(echo $GITHUB_REF | cut -d / -f 3)
@@ -79,6 +87,10 @@ jobs:
         working-directory: microservices_borrowing
 
     steps:
+      - uses: actions/checkout@v2
+      - name: Add hosts to /etc/hosts
+        run: |
+          sudo echo "127.0.0.1 borrowing-postgres" | sudo tee -a /etc/hosts
       - name: Get branch
         id: get_branch
         run: echo ::set-output name=BRANCH::$(echo $GITHUB_REF | cut -d / -f 3)
