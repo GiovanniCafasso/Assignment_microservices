@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-deployment
+  labels:
+    app: notification
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notification
+  template:
+    metadata:
+      labels:
+        app: notification
+    spec:
+      containers:
+        - name: notification-ms
+          image: giovannicafasso/notification:1.1-SNAPSHOT
+          envFrom:
+          - configMapRef:
+              name: notification-config
+          ports:
+          - containerPort: 10000
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: notification-service
+  labels:
+    app: notification
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      nodePort: 32105
+      port: 10000
+      targetPort: 10000
+  selector:
+    app: notification
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: notification-config
+data:
+  HOST_KAFKA: "kafka"
+  PORT_KAFKA: "9020"
+  POSITION: "ConfigMap"

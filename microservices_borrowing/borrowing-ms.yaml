@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: borrowing-ms
-          image: giovannicafasso/borrowing:2.1-SNAPSHOT
+          image: giovannicafasso/borrowing:2.5-SNAPSHOT
           envFrom:
           - configMapRef:
               name: borrowing-config
@@ -26,7 +26,7 @@ spec:
           imagePullPolicy: Always
       initContainers:
       - name: init-myservice
-        image: giovannicafasso/borrowing:2.1-SNAPSHOT
+        image: giovannicafasso/borrowing:2.5-SNAPSHOT
         command: ['/bin/sh', '-c', 'python', 'manage.py', 'makemigrations', 'borrowing']
         command: ['/bin/sh', '-c', 'python', 'manage.py', 'migrate']
 ---
@@ -65,5 +65,6 @@ data:
   HOST_CUSTOMER: "192.168.49.2" #10.105.157.38:8000
   PORT_BOOK: "32102"        
   PORT_CUSTOMER: "32103"
+  HOST_KAFKA: "kafka"
+  PORT_KAFKA: "9092"
   POSITION: "ConfigMap"
-  #'minikube service --url book-service' e 'minikube service --url customer-service'  \\\\  kubectl get services (CLUSTER_IP)

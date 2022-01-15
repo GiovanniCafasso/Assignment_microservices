@@ -1,5 +1,4 @@
 docker container rm {NAME}  # remove container
-python3 manage.py runserver 0.0.0.0:8000
 
 # delete all container stopped
 docker system prune --all --force
@@ -7,7 +6,7 @@ docker system prune --all --force
 # get a bash shell in the container
 docker exec -it <container name> bash
 
-# esempio json to load
+# example json to load
 {
     "title": "prova_title",
     "author": "prova_author"
@@ -21,11 +20,6 @@ docker exec -it <container name> bash
 
 python3 manage.py runserver 0.0.0.0:8000
 
-
-docker exec -it book bash
-docker exec -it customer bash
-docker exec -it borrowing bash
-
 python manage.py makemigrations books
 python manage.py migrate
 
@@ -37,16 +31,13 @@ python manage.py migrate
 
 
 book --> python manage.py test books
-customer -->  python manage.py test customers 
 
 ## rimuovere immagine
 docker rmi --force <id_images> 
 
 
-ip per raggiungere destinazioni:
+destinazioni:
 http://192.168.49.2:32102/books/  book
 http://192.168.49.2:32103/customers  customer
 http://192.168.49.2:32104/borrowing    borrowing
 
-
-Collegamento con borrowing fallisce per presunto 'migrate' che fallisce o non parte
