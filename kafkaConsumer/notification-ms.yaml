@@ -18,9 +18,6 @@ spec:
       containers:
         - name: notification-ms
           image: giovannicafasso/notification:1.1-SNAPSHOT
-          envFrom:
-          - configMapRef:
-              name: notification-config
           ports:
           - containerPort: 10000
           imagePullPolicy: Always
@@ -40,12 +37,3 @@ spec:
       targetPort: 10000
   selector:
     app: notification
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: notification-config
-data:
-  HOST_KAFKA: "kafka"
-  PORT_KAFKA: "9020"
-  POSITION: "ConfigMap"

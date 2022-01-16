@@ -37,7 +37,7 @@ docker rmi --force <id_images>
 
 
 destinazioni:
-http://192.168.49.2:32102/books/  book
+http://192.168.49.2:32102/books  book
 http://192.168.49.2:32103/customers  customer
 http://192.168.49.2:32104/borrowing    borrowing
 
