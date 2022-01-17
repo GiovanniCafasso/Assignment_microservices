@@ -33,7 +33,7 @@ jobs:
           pip install -r requirements.txt
       - name: Run Tests
         run: |
-          python manage.py test
+          ./manage.py test
       - name: Get branch
         id: get_branch
         run: echo ::set-output name=BRANCH::$(echo $GITHUB_REF | cut -d / -f 3)
