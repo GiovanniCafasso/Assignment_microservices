@@ -32,19 +32,18 @@ def borrowing_list(request):
             session.mount('https://', adapter)
             DB_BOOK = session.get(urlBook)
             DB_CUSTOMER = session.get(urlCustomer)
-            # DB_BOOK = requests.get(urlBook)
-            # DB_CUSTOMER = requests.get(urlCustomer)
             for customer in DB_CUSTOMER.json():
                 if customer['id']==serializer.validated_data['id_customer']:
                     for book in DB_BOOK.json():
                         if book['id']==serializer.validated_data['id_book']: 
                             serializer.save()
                             # kafka
-                            host = os.getenv("HOST_KAFKA")
-                            port = os.getenv("PORT_KAFKA")
-                            address = host + ':' + port
-                            producer = KafkaProducer(bootstrap_servers=address)
-                            producer.send('borrowing-notification', b'serializer.data')
+                            if os.getenv("POSITION") == "ConfigMap":    # kafka exists only in kubernetes environment
+                                host = os.getenv("HOST_KAFKA")
+                                port = os.getenv("PORT_KAFKA")
+                                address = host + ':' + port
+                                producer = KafkaProducer(bootstrap_servers=address)
+                                producer.send('borrowing-notification', b'serializer.data')
                             return Response(serializer.data, status=status.HTTP_201_CREATED)
                         else:
                             print("Book doesn't exist")

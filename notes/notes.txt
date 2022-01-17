@@ -41,3 +41,6 @@ http://192.168.49.2:32102/books  book
 http://192.168.49.2:32103/customers  customer
 http://192.168.49.2:32104/borrowing    borrowing
 
+
+# Far partire kibana 
+kubectl port-forward svc/kibana 5601:5601

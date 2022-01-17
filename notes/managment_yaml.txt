@@ -56,8 +56,5 @@ To connect to your database from outside the cluster execute the following comma
     PGPASSWORD="$POSTGRES_PASSWORD" psql --host 127.0.0.1 -U postgres -d postgres -p 5432  
     
     
-# Far partire kibana 
-kubectl port-forward svc/kibana 5601:5601
-
-
+# start local postgres
 sudo --login --user=postgres psql
