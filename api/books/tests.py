@@ -1,7 +1,8 @@
-from django.test import TestCase    # create a fake db
+# from django.test import TestCase    
 from books.models import Book
 from books.serializers import BookSerializer
 from django.test import Client
+from unittest import TestCase       # create a fake db
 
 from django.test.client import RequestFactory
 from books.views import book_detail
