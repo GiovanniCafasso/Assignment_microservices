@@ -33,7 +33,7 @@ class BookTestCase(TestCase):
         request = self.factory.put('/books/2', data)
 
         # Test views.book_detail() as if it were deployed at /books        
-        response = book_detail(request, )
+        response = book_detail(request, 2)
         self.assertEqual(response.status_code, 200)
         print(response)
         # verify update
