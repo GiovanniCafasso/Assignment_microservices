@@ -11,8 +11,8 @@ class BookTestCase(TestCase):
     def setUp(self):
     # Every test needs access to the request factory.
         self.factory = APIRequestFactory()
-        Book.objects.create(id=2, title="title1", author="author1")
-        Book.objects.create(id=3, title="title2", author="author2")
+        Book.objects.create(id=2, title="title2", author="author2")
+        Book.objects.create(id=3, title="title3", author="author3")
         Book.objects.create(id=5, title="title5", author="author5")
         Book.objects.create(id=10, title="title10", author="author10")
 
