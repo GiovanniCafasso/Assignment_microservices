@@ -1,6 +1,6 @@
 docker build . -t giovannicafasso/book:2.2-SNAPSHOT
 docker push giovannicafasso/book:2.2-SNAPSHOT
-kubectl delete deployment.apps/books-deployment
+kubectl delete deployment.apps/book-deployment
 kubectl apply -f book-ms.yaml
 kubectl get pods
 

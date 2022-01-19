@@ -44,3 +44,33 @@ http://192.168.49.2:32104/borrowing    borrowing
 
 # Far partire kibana 
 kubectl port-forward svc/kibana 5601:5601
+
+########################################################################
+
+bloccato nel test,
+testato alcune modifiche fallimentari, per tornare indietro non ho fatto la commit-push
+modifiche applicate al db originale, non va bene
+1 test fallisce
+
+# create 2 books and get all
+def test_post_plus_get(self):
+    print("Test create 2 books and get all")
+    Book.objects.create(title="title1", author="author1")
+    Book.objects.create(title="title2", author="author2")
+    print("Created books")
+    books = Book.objects.all()
+    serializer = BookSerializer(books, many=True)
+    print("Serializer book: " + str(serializer.data))
+    print("*********************************************")
+
+
+    # Update book
+    def test_update(self):
+        # Update author with 'Mario' where id=1
+        # Book.objects.select_for_update(id=1, author="Mario")
+        Book.objects.update(author="Mario")
+        print("Updated book")
+        books = Book.objects.all()
+        serializer = BookSerializer(books, many=True)
+        print("Serializer book: " + str(serializer.data))
+        print("*********************************************")
