@@ -1,9 +1,9 @@
+################
+Build and Push
+################
 docker build . -t giovannicafasso/book:2.2-SNAPSHOT
 docker push giovannicafasso/book:2.2-SNAPSHOT
-kubectl delete deployment.apps/book-deployment
 kubectl apply -f book-ms.yaml
-kubectl get pods
-
 
 docker build . -t giovannicafasso/customer:2.0-SNAPSHOT
 docker push giovannicafasso/customer:2.0-SNAPSHOT
@@ -11,9 +11,7 @@ kubectl apply -f customer-ms.yaml
 
 docker build . -t giovannicafasso/borrowing:2.5-SNAPSHOT
 docker push giovannicafasso/borrowing:2.5-SNAPSHOT
-kubectl delete deployment.apps/borrowing-deployment
 kubectl apply -f borrowing-ms.yaml
-kubectl get pods
 
 docker build . -t giovannicafasso/notification:1.1-SNAPSHOT
 docker push giovannicafasso/notification:1.1-SNAPSHOT
@@ -22,22 +20,20 @@ kubectl apply -f notification-ms.yaml
 kubectl get pods
 
 
-
-#########
-MANAGEMENT YAML
-#########
-kubectl get deployments			# ottenre deply
-kubectl delete deployment {deply_name}	# eliminare deply
+################
+MANAGEMENT KUBERNETES
+################
+kubectl get deployments				# ottenre deploy
+kubectl delete deployment {deply_name}		# eliminare deply
 kubectl get pods				# ottieni pods
-kubectl get services			# ottieni servizi
+kubectl get services				# ottieni servizi
 minikube service --url borrowing-service 	# ottenere ip finale
 
 
-	kubectl get deployments
-	kubectl describe pod {deployment name}
+kubectl get deployments
+kubectl describe pod {deployment name}
 kubectl get cm
-
-kubectl logs book-deployment-d4855c66d-mhb2p 	# log pod quando faccio apply
+kubectl logs book-deployment-d4855c66d-mhb2p 
 
 
 
@@ -47,17 +43,11 @@ HELM
 
 helm install --values postgresql-values-book.yaml book-postgres bitnami/postgresql
 To connect to your database from outside the cluster execute the following commands:
-
-    kubectl port-forward --namespace default svc/book-postgres 5432:5432 &
-    PGPASSWORD="$POSTGRES_PASSWORD" psql --host 127.0.0.1 -U postgres -d postgres -p 5432
+kubectl port-forward --namespace default svc/book-postgres 5432:5432 &
+PGPASSWORD="$POSTGRES_PASSWORD" psql --host 127.0.0.1 -U postgres -d postgres -p 5432
     
     
 helm install --values postgresql-values-borrowing.yaml borrowing-postgres bitnami/postgresql
 To connect to your database from outside the cluster execute the following commands:
-
-    kubectl port-forward --namespace default svc/borrowing-postgres 5432:5432 &
-    PGPASSWORD="$POSTGRES_PASSWORD" psql --host 127.0.0.1 -U postgres -d postgres -p 5432  
-    
-    
-# start local postgres
-sudo --login --user=postgres psql
+kubectl port-forward --namespace default svc/borrowing-postgres 5432:5432 &
+PGPASSWORD="$POSTGRES_PASSWORD" psql --host 127.0.0.1 -U postgres -d postgres -p 5432
