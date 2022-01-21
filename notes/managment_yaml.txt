@@ -23,10 +23,10 @@ kubectl get pods
 ################
 MANAGEMENT KUBERNETES
 ################
-kubectl get deployments				# ottenre deploy
+kubectl get deployments				        # ottenre deploy
 kubectl delete deployment {deply_name}		# eliminare deply
-kubectl get pods				# ottieni pods
-kubectl get services				# ottieni servizi
+kubectl get pods				            # ottieni pods
+kubectl get services				        # ottieni servizi
 minikube service --url borrowing-service 	# ottenere ip finale
 
 
