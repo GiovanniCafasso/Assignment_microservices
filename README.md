@@ -1,3 +1,3 @@
 # Assignment microservices
 
-![](schema%20assignments.jpg)
+![](schema_assignments.png)
